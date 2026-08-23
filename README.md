@@ -10,7 +10,7 @@
 
 | Name             | Role        |
 | ---------------- | ----------- |
-| **Manikandan**   |  Leader     |
+| **Manikandan**   |  Lead     |
 | Aksshaya Devi    |  Member     |
 | Najeebur Rahuman |  Member     |
 | Sudharsan        |  Member     |
