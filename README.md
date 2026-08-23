@@ -50,9 +50,9 @@ Technologies and tools will be selected based on the project requirements.
 
 ## 🏆 Hackathon
 
-**Team:** 6RAYS
-**Department:** Biomedical Engineering
-**Event:** Internal Hackathon — 2026
+**Team :** 6RAYS , 
+**Department :** Biomedical Engineering , 
+**Event :** Internal Hackathon — 2026 .
 
 ---
 
