@@ -1,6 +1,6 @@
 # 6RAYS 🧬
 
-###  Smart India Hackathon 2026 🚀 | Biomedical Engineering
+###  Smart India Hackathon 2026 🚀 
 
 **6RAYS** is a team of Biomedical Engineering students focused on developing innovative, practical, and impactful solutions to real-world healthcare challenges.
 
@@ -21,11 +21,12 @@
 
 ## 💡 Project
 
-### **Project Title: Coming Soon**
+### **Project Title : JEEVA SETU**
 
-Our project aims to address a real-world healthcare challenge through the application of **Biomedical Engineering, technology, and innovation**.
+Transforming fragmented rural health-survey data into continuous digital patient histories, enabling offline monitoring, secure synchronisation, longitudinal health tracking, and actionable trends for timely, informed clinical follow-up.
 
-> Project details will be updated once the problem statement and solution are finalized.
+
+
 
 ---
 
@@ -35,16 +36,14 @@ Technologies and tools will be selected based on the project requirements.
 
 * Biomedical Instrumentation
 * Sensors & Embedded Systems
-* IoT
-* Artificial Intelligence / Machine Learning
-* Python / MATLAB
+* HTML,Python Fast API
 * Data Analysis
 
 ---
 
 ## 📌 Project Status
 
-🚧 **Under Development**
+🟢 **Reaching its final stage**
 
 ---
 
