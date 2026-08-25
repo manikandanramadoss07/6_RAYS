@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeeva Setu</title>
+
+<style>
+
+:root{
+    --primary:#0878c9;
+    --primary-dark:#04558f;
+    --bg:#f4f8fc;
+    --card:#ffffff;
+    --text:#17212b;
+    --muted:#64748b;
+    --border:#d8e3ee;
+    --green:#16a34a;
+    --yellow:#eab308;
+    --red:#dc2626;
+    --shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+body.dark{
+    --bg:#08111c;
+    --card:#101d2b;
+    --text:#ffffff;
+    --muted:#c1ccd8;
+    --border:#ffffff;
+    --shadow:0 8px 25px rgba(0,0,0,.4);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,input,select,textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+.app{
+    width:100%;
+    max-width:480px;
+    min-height:100vh;
+    margin:auto;
+    background:var(--bg);
+}
+
+/* LOGIN */
+
+#loginPage{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.login-card{
+    width:100%;
+    background:var(--card);
+    padding:30px 22px;
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+}
+
+.logo{
+    width:72px;
+    height:72px;
+    margin:auto;
+    border-radius:20px;
+    background:var(--primary);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.login-card h1{
+    text-align:center;
+    margin-top:15px;
+}
+
+.login-card p{
+    text-align:center;
+    color:var(--muted);
+    margin:8px 0 25px;
+}
+
+.login-input{
+    width:100%;
+    padding:14px;
+    margin:7px 0;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    outline:none;
+}
+
+.login-input:focus{
+    border-color:var(--primary);
+}
+
+.portal-buttons{
+    display:grid;
+    gap:12px;
+    margin-top:15px;
+}
+
+.portal-btn{
+    padding:15px;
+    border-radius:13px;
+    border:1px solid var(--primary);
+    background:transparent;
+    color:var(--primary);
+    font-weight:bold;
+}
+
+.portal-btn:hover{
+    background:var(--primary);
+    color:white;
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    border:0;
+    border-radius:12px;
+    background:var(--primary);
+    color:white;
+    font-weight:bold;
+}
+
+.secondary-btn{
+    width:100%;
+    padding:13px;
+    margin-top:9px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:transparent;
+    color:var(--text);
+    font-weight:bold;
+}
+
+/* HEADER */
+
+.header{
+    padding:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header h2{
+    font-size:22px;
+}
+
+.header small{
+    color:var(--muted);
+}
+
+.theme-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+}
+
+/* CONTENT */
+
+.content{
+    padding:0 16px 100px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:16px;
+    margin-bottom:14px;
+    box-shadow:var(--shadow);
+}
+
+.card h3{
+    margin-bottom:12px;
+}
+
+.stat-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.stat-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:18px;
+}
+
+.stat-card span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.stat-card strong{
+    display:block;
+    margin-top:6px;
+    font-size:27px;
+}
+
+/* DASHBOARD */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.dashboard-btn{
+    min-height:110px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    border-radius:18px;
+    padding:15px;
+    text-align:left;
+}
+
+.dashboard-btn:hover{
+    border-color:var(--primary);
+}
+
+.dashboard-btn .icon{
+    font-size:27px;
+    margin-bottom:10px;
+}
+
+.dashboard-btn b{
+    display:block;
+    margin-bottom:5px;
+}
+
+.dashboard-btn small{
+    color:var(--muted);
+}
+
+/* PATIENT */
+
+.patient-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:16px;
+    margin-bottom:12px;
+}
+
+.patient-card:active{
+    transform:scale(.99);
+}
+
+.patient-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.patient-name{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.patient-info{
+    color:var(--muted);
+    line-height:1.65;
+    margin-top:7px;
+}
+
+.risk-badge{
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.green{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.yellow{
+    background:#fef9c3;
+    color:#854d0e;
+}
+
+.red{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+/* FILTER */
+
+.filters{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:8px;
+}
+
+.filter{
+    white-space:nowrap;
+    padding:9px 14px;
+    border-radius:20px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+}
+
+.filter.active{
+    background:var(--primary);
+    color:white;
+}
+
+/* FORM */
+
+.form-group{
+    margin-bottom:13px;
+}
+
+.form-group label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+.form-control{
+    width:100%;
+    padding:12px;
+    border-radius:11px;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.primary-btn{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:12px;
+    background:var(--primary);
+    color:white;
+    font-weight:bold;
+}
+
+/* PARAMETERS */
+
+.parameter-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.parameter-row:last-child{
+    border-bottom:0;
+}
+
+/* NOTES */
+
+.note{
+    background:var(--bg);
+    border:1px solid var(--border);
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:8px;
+}
+
+.note small{
+    color:var(--muted);
+}
+
+/* CHART */
+
+.chart{
+    width:100%;
+    height:190px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:10px;
+}
+
+.chart svg{
+    width:100%;
+    height:100%;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:480px;
+    background:var(--card);
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:space-around;
+    padding:9px 4px;
+    z-index:50;
+}
+
+.nav-btn{
+    background:none;
+    border:0;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.nav-btn span{
+    display:block;
+    font-size:21px;
+    margin-bottom:3px;
+}
+
+.nav-btn.active{
+    color:var(--primary);
+}
+
+/* DARK MODE */
+
+body.dark .login-card,
+body.dark .card,
+body.dark .stat-card,
+body.dark .dashboard-btn,
+body.dark .patient-card,
+body.dark .form-control,
+body.dark .login-input,
+body.dark .theme-btn,
+body.dark .bottom-nav,
+body.dark .chart,
+body.dark .note,
+body.dark .filter{
+    border:2px solid white;
+}
+
+/* MOBILE */
+
+@media(max-width:360px){
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+/* =====================================================
+   RECORD HISTORY / EDIT / SWITCH MEMBER
+===================================================== */
+.action-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:10px;
+}
+.small-btn{
+    padding:11px 12px;
+    border-radius:11px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    font-weight:bold;
+}
+.small-btn.primary{
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--primary);
+}
+.history-item{
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:13px;
+    margin-bottom:10px;
+    background:var(--bg);
+}
+.history-item:last-child{margin-bottom:0}
+.history-head{
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    align-items:center;
+    margin-bottom:8px;
+}
+.history-head small{color:var(--muted)}
+.member-chip{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:13px;
+    margin-bottom:9px;
+    background:var(--card);
+}
+.member-chip b{display:block;margin-bottom:4px}
+.member-chip small{color:var(--muted)}
+.empty-state{
+    text-align:center;
+    color:var(--muted);
+    padding:24px 10px;
+}
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+}
+@media(max-width:360px){
+    .action-row{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- =====================================================
+LOGIN
+===================================================== -->
+
+<section id="loginPage">
+
+<div class="login-card">
+
+<div class="logo">JS</div>
+
+<h1>Welcome</h1>
+
+<p>Jeeva Setu Digital Healthcare</p>
+
+<div class="portal-buttons">
+
+<button class="portal-btn" onclick="showDoctorLogin()">
+👨‍⚕️ Doctor Login
+</button>
+
+<button class="portal-btn" onclick="showSurveyorLogin()">
+🩺 Medical Surveyor Login
+</button>
+
+<button class="portal-btn" onclick="showPatientLogin()">
+👤 Patient Login
+</button>
+
+</div>
+
+<br>
+
+<button
+class="theme-btn"
+style="display:block;margin:auto"
+onclick="toggleTheme()">
+🌙
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+MAIN APP
+===================================================== -->
+
+<section id="mainApp" class="hidden">
+
+<div class="header">
+
+<div>
+<h2 id="pageTitle">Dashboard</h2>
+<small id="pageSubtitle">Jeeva Setu</small>
+</div>
+
+<button class="theme-btn" onclick="toggleTheme()">
+🌙
+</button>
+
+</div>
+
+<div id="content" class="content"></div>
+
+<div class="bottom-nav">
+
+<button class="nav-btn active" onclick="showDashboard()">
+<span>⌂</span>
+Home
+</button>
+
+<button class="nav-btn" onclick="showPatients()">
+<span>👥</span>
+Patients
+</button>
+
+<button class="nav-btn" onclick="showReports()">
+<span>📋</span>
+Reports
+</button>
+
+<button class="nav-btn" onclick="logout()">
+<span>↩</span>
+Logout
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+
+<script>
+/* =====================================================
+   JEEVA SETU - UPDATED DEMO APPLICATION
+   Roles:
+   1. Doctor   -> dashboard, risk groups, edit records,
+                  previous reports and notes
+   2. Surveyor -> view/update records and ADD new patients
+   3. Patient  -> only records/reports linked to the
+                  entered mobile number; no all-patient list
+                  and can switch between members sharing a phone
+===================================================== */
+
+/* =====================================================
+   PATIENT DATABASE
+===================================================== */
+let patients=[
+{
+ id:1,name:"Arun Kumar",age:45,sex:"Male",phone:"9876543210",blood:"B+",
+ location:"Coimbatore",risk:25,
+ parameters:{bp:"118/76",glucose:"92 mg/dL",glucoseType:"FG",heartRate:"72 bpm",spo2:"98%",temperature:"36.7 °C",weight:"68 kg",height:"170 cm",bmi:"23.5"},
+ notes:[],history:[]
+},
+{
+ id:2,name:"Priya S",age:38,sex:"Female",phone:"9876543210",blood:"O+",
+ location:"Coimbatore",risk:40,
+ parameters:{bp:"128/82",glucose:"108 mg/dL",glucoseType:"FG",heartRate:"79 bpm",spo2:"97%",temperature:"36.8 °C",weight:"61 kg",height:"159 cm",bmi:"24.1"},
+ notes:[],history:[]
+},
+{
+ id:3,name:"Rahul M",age:52,sex:"Male",phone:"9123456780",blood:"A+",
+ location:"Tiruppur",risk:75,
+ parameters:{bp:"148/94",glucose:"156 mg/dL",glucoseType:"PG",heartRate:"92 bpm",spo2:"95%",temperature:"37.1 °C",weight:"84 kg",height:"170 cm",bmi:"29.1"},
+ notes:[],history:[]
+},
+{
+ id:4,name:"Divya R",age:29,sex:"Female",phone:"9000000001",blood:"AB+",
+ location:"Erode",risk:18,
+ parameters:{bp:"110/72",glucose:"88 mg/dL",glucoseType:"FG",heartRate:"68 bpm",spo2:"99%",temperature:"36.5 °C",weight:"55 kg",height:"159 cm",bmi:"21.8"},
+ notes:[],history:[]
+},
+{
+ id:5,name:"Karthik P",age:47,sex:"Male",phone:"9000000002",blood:"O-",
+ location:"Coimbatore",risk:62,
+ parameters:{bp:"136/88",glucose:"126 mg/dL",glucoseType:"FG",heartRate:"84 bpm",spo2:"96%",temperature:"36.9 °C",weight:"77 kg",height:"170 cm",bmi:"26.6"},
+ notes:[],history:[]
+},
+{
+ id:6,name:"Meena Devi",age:61,sex:"Female",phone:"9000000003",blood:"A+",
+ location:"Pollachi",risk:78,
+ parameters:{bp:"152/96",glucose:"170 mg/dL",glucoseType:"PG",heartRate:"96 bpm",spo2:"94%",temperature:"37.2 °C",weight:"80 kg",height:"163 cm",bmi:"30.1"},
+ notes:[],history:[]
+},
+{
+ id:7,name:"Vignesh K",age:34,sex:"Male",phone:"9000000004",blood:"B+",
+ location:"Coimbatore",risk:30,
+ parameters:{bp:"120/80",glucose:"96 mg/dL",glucoseType:"FG",heartRate:"74 bpm",spo2:"98%",temperature:"36.6 °C",weight:"70 kg",height:"171 cm",bmi:"23.9"},
+ notes:[],history:[]
+},
+{
+ id:8,name:"Anitha R",age:43,sex:"Female",phone:"9000000005",blood:"O+",
+ location:"Mettupalayam",risk:55,
+ parameters:{bp:"132/86",glucose:"118 mg/dL",glucoseType:"FG",heartRate:"82 bpm",spo2:"97%",temperature:"36.9 °C",weight:"68 kg",height:"163 cm",bmi:"25.6"},
+ notes:[],history:[]
+},
+{
+ id:9,name:"Suresh B",age:56,sex:"Male",phone:"9000000006",blood:"A-",
+ location:"Tiruppur",risk:83,
+ parameters:{bp:"158/98",glucose:"182 mg/dL",glucoseType:"PG",heartRate:"101 bpm",spo2:"93%",temperature:"37.3 °C",weight:"91 kg",height:"170 cm",bmi:"31.5"},
+ notes:[],history:[]
+},
+{
+ id:10,name:"Lakshmi P",age:36,sex:"Female",phone:"9000000007",blood:"B+",
+ location:"Coimbatore",risk:22,
+ parameters:{bp:"116/74",glucose:"94 mg/dL",glucoseType:"FG",heartRate:"70 bpm",spo2:"99%",temperature:"36.6 °C",weight:"57 kg",height:"160 cm",bmi:"22.3"},
+ notes:[],history:[]
+}
+];
+
+/* Create one initial historical report for every demo patient. */
+patients.forEach(p=>{
+    p.history=[{
+        date:"Initial record",
+        source:"Medical Survey",
+        parameters:{...p.parameters},
+        risk:p.risk
+    }];
+});
+
+/* =====================================================
+   GLOBAL STATE
+===================================================== */
+let currentPortal="";
+let currentPatient=null;
+let patientPhoneSession="";
+let editingExistingPatient=false;
+
+/* =====================================================
+   LOGIN
+===================================================== */
+function showDoctorLogin(){
+document.getElementById("loginPage").innerHTML=`
+<div class="login-card">
+<div class="logo">JS</div>
+<h1>Doctor Login</h1>
+<p>Login using Doctor ID and Password</p>
+<input id="doctorId" class="login-input" type="text" placeholder="Doctor ID">
+<input id="doctorPassword" class="login-input" type="password" placeholder="Password">
+<button class="login-btn" onclick="doctorLogin()">Login</button>
+<button class="secondary-btn" onclick="location.reload()">Back</button>
+</div>`;
+}
+
+function doctorLogin(){
+let id=document.getElementById("doctorId").value.trim();
+let password=document.getElementById("doctorPassword").value;
+if(id==="DOC001" && password==="doctor123"){
+    currentPortal="doctor";
+    openApp();
+}else alert("Invalid Doctor ID or Password");
+}
+
+function showSurveyorLogin(){
+document.getElementById("loginPage").innerHTML=`
+<div class="login-card">
+<div class="logo">JS</div>
+<h1>Surveyor Login</h1>
+<p>Login using Surveyor ID and Password</p>
+<input id="surveyorId" class="login-input" type="text" placeholder="Surveyor ID">
+<input id="surveyorPassword" class="login-input" type="password" placeholder="Password">
+<button class="login-btn" onclick="surveyorLogin()">Login</button>
+<button class="secondary-btn" onclick="location.reload()">Back</button>
+</div>`;
+}
+
+function surveyorLogin(){
+let id=document.getElementById("surveyorId").value.trim();
+let password=document.getElementById("surveyorPassword").value;
+if(id==="SUR001" && password==="survey123"){
+    currentPortal="surveyor";
+    openApp();
+}else alert("Invalid Surveyor ID or Password");
+}
+
+function showPatientLogin(){
+document.getElementById("loginPage").innerHTML=`
+<div class="login-card">
+<div class="logo">JS</div>
+<h1>Patient Login</h1>
+<p>Enter your registered mobile number</p>
+<input id="loginPhone" class="login-input" type="tel" maxlength="10"
+inputmode="numeric" placeholder="Mobile Number">
+<button class="login-btn" onclick="patientLogin()">Send OTP</button>
+<button class="secondary-btn" onclick="location.reload()">Back</button>
+</div>`;
+}
+
+function patientLogin(){
+let phone=document.getElementById("loginPhone").value.trim();
+if(!/^[0-9]{10}$/.test(phone)){
+    alert("Enter a valid 10-digit mobile number");
+    return;
+}
+showOTP(phone);
+}
+
+function showOTP(phone){
+document.getElementById("loginPage").innerHTML=`
+<div class="login-card">
+<div class="logo">JS</div>
+<h1>OTP Verification</h1>
+<p>OTP sent to ${phone}</p>
+<input id="otp" class="login-input" maxlength="6" inputmode="numeric"
+placeholder="Enter 6-digit OTP">
+<button class="login-btn" onclick="verifyOTP('${phone}')">Verify OTP</button>
+<button class="secondary-btn" onclick="location.reload()">Back</button>
+</div>`;
+}
+
+function verifyOTP(phone){
+let otp=document.getElementById("otp").value.trim();
+if(otp!=="123456"){
+    alert("Invalid OTP. Demo OTP: 123456");
+    return;
+}
+let matching=patients.filter(p=>p.phone===phone);
+if(matching.length===0){
+    alert("No patient registered with this number");
+    return;
+}
+patientPhoneSession=phone;
+currentPortal="patient";
+
+/* Important: no logout/re-login is required for shared numbers. */
+if(matching.length>1){
+    showPatientSelection(matching);
+}else{
+    currentPatient=matching[0];
+    openApp();
+}
+}
+
+function showPatientSelection(list){
+document.getElementById("loginPage").innerHTML=`
+<div class="login-card">
+<div class="logo">JS</div>
+<h1>Select Member</h1>
+<p>This mobile number is linked to ${list.length} patient records.</p>
+<div id="patientSelection"></div>
+</div>`;
+let box=document.getElementById("patientSelection");
+list.forEach(patient=>{
+box.innerHTML+=`
+<button class="portal-btn" style="width:100%;margin-bottom:10px"
+onclick="selectPatient(${patient.id})">
+<b>${patient.name}</b><br>
+<small>${patient.age} years • ${patient.sex}</small>
+</button>`;
+});
+}
+
+function selectPatient(id){
+currentPatient=patients.find(p=>p.id===id);
+currentPortal="patient";
+openApp();
+}
+
+/* =====================================================
+   APP ROUTER
+===================================================== */
+function openApp(){
+document.getElementById("loginPage").classList.add("hidden");
+document.getElementById("mainApp").classList.remove("hidden");
+showDashboard();
+}
+
+function showDashboard(){
+if(currentPortal==="doctor") doctorDashboard();
+else if(currentPortal==="surveyor") surveyorDashboard();
+else if(currentPortal==="patient") patientDashboard();
+}
+
+/* =====================================================
+   DOCTOR DASHBOARD
+   Every statistic is clickable and opens the matching records.
+===================================================== */
+function doctorDashboard(){
+setTitle("Doctor Dashboard","Patient monitoring overview");
+
+let total=patients.length;
+let high=patients.filter(p=>p.risk>=71).length;
+let moderate=patients.filter(p=>p.risk>=31&&p.risk<=70).length;
+let low=patients.filter(p=>p.risk<=30).length;
+
+document.getElementById("content").innerHTML=`
+<div class="stat-grid">
+<button class="stat-card" onclick="showPatients()" style="text-align:left">
+<span>Total Patients</span><strong>${total}</strong>
+<small>Tap to view all ${total} records</small>
+</button>
+
+<button class="stat-card" onclick="showRiskPatients('high')" style="text-align:left">
+<span>High Risk</span><strong>${high}</strong>
+<small>Tap to view high-risk patients</small>
+</button>
+
+<button class="stat-card" onclick="showRiskPatients('moderate')" style="text-align:left">
+<span>Moderate Risk</span><strong>${moderate}</strong>
+<small>Tap to view moderate-risk patients</small>
+</button>
+
+<button class="stat-card" onclick="showRiskPatients('low')" style="text-align:left">
+<span>Low Risk</span><strong>${low}</strong>
+<small>Tap to view low-risk patients</small>
+</button>
+</div>
+
+<br>
+
+<div class="dashboard-grid">
+<button class="dashboard-btn" onclick="showPatients()">
+<div class="icon">👥</div><b>Patients</b>
+<small>View all ${total} patient records</small>
+</button>
+
+<button class="dashboard-btn" onclick="showRiskPatients('high')">
+<div class="icon">🚨</div><b>High Priority</b>
+<small>${high} high-risk records</small>
+</button>
+
+<button class="dashboard-btn" onclick="showRiskPatients('moderate')">
+<div class="icon">⚠️</div><b>Moderate Risk</b>
+<small>${moderate} moderate-risk records</small>
+</button>
+
+<button class="dashboard-btn" onclick="showRiskPatients('low')">
+<div class="icon">✅</div><b>Low Risk</b>
+<small>${low} low-risk records</small>
+</button>
+
+<button class="dashboard-btn" onclick="showTrends()">
+<div class="icon">📈</div><b>Trends</b>
+<small>1W • 1M • 3M • 1Y</small>
+</button>
+
+<button class="dashboard-btn" onclick="showReports()">
+<div class="icon">📋</div><b>Reports</b>
+<small>Current + previous reports</small>
+</button>
+</div>`;
+}
+
+/* =====================================================
+   SURVEYOR DASHBOARD
+===================================================== */
+function surveyorDashboard(){
+setTitle("Surveyor Dashboard","Patient parameter management");
+
+document.getElementById("content").innerHTML=`
+<div class="stat-grid">
+<button class="stat-card" onclick="showPatients()" style="text-align:left">
+<span>Total Patients</span><strong>${patients.length}</strong>
+<small>Tap to view patient records</small>
+</button>
+
+<button class="stat-card" onclick="showReports()" style="text-align:left">
+<span>Total Reports</span><strong>${patients.reduce((n,p)=>n+p.history.length,0)}</strong>
+<small>Current + previous reports</small>
+</button>
+</div>
+
+<br>
+
+<div class="dashboard-grid">
+<button class="dashboard-btn" onclick="showPatients()">
+<div class="icon">👥</div><b>Patients</b>
+<small>View and update patient information</small>
+</button>
+
+<button class="dashboard-btn" onclick="addPatient()">
+<div class="icon">➕</div><b>Add New Patient</b>
+<small>Register a new patient record</small>
+</button>
+
+<button class="dashboard-btn" onclick="showReports()">
+<div class="icon">📋</div><b>Reports</b>
+<small>View uploaded medical reports</small>
+</button>
+</div>`;
+}
+
+/* =====================================================
+   PATIENT DASHBOARD
+===================================================== */
+function patientDashboard(){
+let members=patients.filter(p=>p.phone===patientPhoneSession);
+
+setTitle("My Health","Records linked to mobile number");
+
+document.getElementById("content").innerHTML=`
+<div class="card">
+<h3>${currentPatient.name}</h3>
+<div class="patient-info">
+Age: ${currentPatient.age}<br>
+Sex: ${currentPatient.sex}<br>
+Blood Group: ${currentPatient.blood}<br>
+Location: ${currentPatient.location}<br>
+Phone: ${currentPatient.phone}
+</div>
+</div>
+
+<div class="card">
+<div class="section-title">
+<h3>Members on this mobile number</h3>
+</div>
+${members.map(p=>`
+<div class="member-chip">
+<div>
+<b>${p.name}</b>
+<small>${p.age} years • ${p.sex}</small>
+</div>
+<button class="small-btn primary" onclick="switchPatientMember(${p.id})">Open</button>
+</div>`).join("")}
+</div>
+
+<div class="dashboard-grid">
+<button class="dashboard-btn" onclick="showPatientReport()">
+<div class="icon">📋</div><b>My Reports</b>
+<small>Current and previous medical reports</small>
+</button>
+
+<button class="dashboard-btn" onclick="showDoctorNotes()">
+<div class="icon">📝</div><b>Doctor Notes</b>
+<small>View doctor's notes</small>
+</button>
+</div>`;
+}
+
+function switchPatientMember(id){
+let p=patients.find(x=>x.id===id && x.phone===patientPhoneSession);
+if(!p)return;
+currentPatient=p;
+patientDashboard();
+}
+
+function showPatientMembers(){
+patientDashboard();
+}
+
+/* =====================================================
+   PATIENT LIST
+   Doctor/Surveyor can see all records.
+   Patient never gets the all-patient list.
+===================================================== */
+function showPatients(){
+if(currentPortal==="patient"){
+    showPatientPhoneReports();
+    return;
+}
+
+setTitle("All Patients","Patient records");
+
+let list=[...patients];
+if(currentPortal==="doctor") list.sort((a,b)=>b.risk-a.risk);
+
+let html="";
+list.forEach(patient=>{
+let riskHTML = currentPortal==="doctor"
+    ? `<span class="risk-badge ${getRiskClass(patient.risk)}">${getRiskText(patient.risk)}</span>`
+    : "";
+
+html+=`
+<div class="patient-card" onclick="openPatient(${patient.id})">
+<div class="patient-top">
+<div>
+<div class="patient-name">${patient.name}</div>
+<div class="patient-info">${patient.age} years • ${patient.sex}</div>
+</div>
+${riskHTML}
+</div>
+<div class="patient-info">
+📞 ${patient.phone}<br>
+🩸 ${patient.blood}<br>
+📍 ${patient.location}<br>
+📋 ${patient.history.length} report${patient.history.length===1?"":"s"}
+</div>
+</div>`;
+});
+
+document.getElementById("content").innerHTML=html || `<div class="empty-state">No patients found.</div>`;
+}
+
+/* =====================================================
+   OPEN PATIENT
+===================================================== */
+function openPatient(id){
+currentPatient=patients.find(p=>p.id===id);
+if(!currentPatient)return;
+
+if(currentPortal==="surveyor") showSurveyForm();
+else if(currentPortal==="doctor") showDoctorPatient();
+}
+
+/* =====================================================
+   DOCTOR PATIENT RECORD
+===================================================== */
+function showDoctorPatient(){
+let p=currentPatient.parameters;
+
+setTitle(currentPatient.name,"Complete patient record");
+
+document.getElementById("content").innerHTML=`
+<div class="card">
+<div class="section-title">
+<h3>Patient Information</h3>
+<span class="risk-badge ${getRiskClass(currentPatient.risk)}">${currentPatient.risk}/100</span>
+</div>
+<div class="patient-info">
+Name: ${currentPatient.name}<br>
+Age: ${currentPatient.age}<br>
+Sex: ${currentPatient.sex}<br>
+Phone: ${currentPatient.phone}<br>
+Blood Group: ${currentPatient.blood}<br>
+Location: ${currentPatient.location}
+</div>
+<div class="action-row">
+<button class="small-btn primary" onclick="showDoctorEditForm()">✏️ Edit Record</button>
+<button class="small-btn" onclick="showPatientHistory()">🕘 Previous Reports</button>
+</div>
+</div>
+
+<div class="card">
+<h3>Latest Medical Parameters</h3>
+${parameterRows(p)}
+</div>
+
+<div class="card">
+<h3>Risk Score</h3>
+<div class="risk-badge ${getRiskClass(currentPatient.risk)}">
+${currentPatient.risk}/100 — ${getRiskText(currentPatient.risk)}
+</div>
+</div>
+
+<div class="card">
+<h3>Doctor's Notes</h3>
+${renderNotes(currentPatient)}
+<textarea id="doctorNote" class="form-control" rows="4"
+placeholder="Add description or doctor's note"></textarea>
+<button class="primary-btn" style="margin-top:10px" onclick="saveDoctorNote()">
+Save Doctor Note
+</button>
+</div>`;
+}
+
+/* =====================================================
+   DOCTOR EDIT FORM
+===================================================== */
+function showDoctorEditForm(){
+editingExistingPatient=true;
+showEditForm("Edit Patient Record","Save Doctor Changes");
+}
+
+function showEditForm(title,saveText){
+let p=currentPatient.parameters;
+
+setTitle(title,currentPatient.name);
+
+document.getElementById("content").innerHTML=`
+<div class="card">
+<h3>Patient Information</h3>
+
+<div class="form-group">
+<label>Name</label>
+<input id="patientName" class="form-control" value="${esc(currentPatient.name)}">
+</div>
+
+<div class="form-grid">
+<div class="form-group">
+<label>Age</label>
+<input id="patientAge" class="form-control" type="number" value="${currentPatient.age}">
+</div>
+<div class="form-group">
+<label>Sex</label>
+<select id="patientSex" class="form-control">
+<option ${currentPatient.sex==="Male"?"selected":""}>Male</option>
+<option ${currentPatient.sex==="Female"?"selected":""}>Female</option>
+<option ${currentPatient.sex==="Other"?"selected":""}>Other</option>
+</select>
+</div>
+</div>
+
+<div class="form-group">
+<label>Phone Number</label>
+<input id="patientPhone" class="form-control" type="tel" maxlength="10" value="${currentPatient.phone}">
+</div>
+
+<div class="form-grid">
+<div class="form-group">
+<label>Blood Group</label>
+<select id="patientBlood" class="form-control">${bloodOptions(currentPatient.blood)}</select>
+</div>
+<div class="form-group">
+<label>Location</label>
+<input id="patientLocation" class="form-control" value="${esc(currentPatient.location)}">
+</div>
+</div>
+
+<div class="form-group">
+<label>Risk Score (0–100)</label>
+<input id="riskScore" class="form-control" type="number" min="0" max="100" value="${currentPatient.risk}">
+</div>
+</div>
+
+${medicalFormHTML(p)}
+
+<button class="primary-btn" onclick="saveDoctorEdit()">${saveText}</button>
+<button class="secondary-btn" onclick="showDoctorPatient()">Cancel</button>`;
+}
+
+function medicalFormHTML(p){
+return `
+<div class="card">
+<h3>Medical Parameters</h3>
+
+<div class="form-group">
+<label>Blood Pressure (mmHg)</label>
+<input id="bp" class="form-control" placeholder="120/80" value="${esc(p.bp)}">
+</div>
+
+<div class="form-group">
+<label>Glucose Type</label>
+<select id="glucoseType" class="form-control">
+<option value="FG" ${p.glucoseType==="FG"?"selected":""}>Fasting Glucose (FG)</option>
+<option value="PG" ${p.glucoseType==="PG"?"selected":""}>Postprandial Glucose (PG)</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Glucose (mg/dL)</label>
+<input id="glucose" class="form-control" type="number" value="${numericOnly(p.glucose)}">
+</div>
+
+<div class="form-group">
+<label>Heart Rate (bpm)</label>
+<input id="heartRate" class="form-control" type="number" value="${numericOnly(p.heartRate)}">
+</div>
+
+<div class="form-group">
+<label>SpO₂ (%)</label>
+<input id="spo2" class="form-control" type="number" value="${numericOnly(p.spo2)}">
+</div>
+
+<div class="form-group">
+<label>Temperature (°C)</label>
+<input id="temperature" class="form-control" type="number" step="0.1" value="${numericOnly(p.temperature)}">
+</div>
+
+<div class="form-group">
+<label>Weight (kg)</label>
+<input id="weight" class="form-control" type="number" step="0.1" value="${numericOnly(p.weight)}">
+</div>
+
+<div class="form-group">
+<label>Height (cm)</label>
+<input id="height" class="form-control" type="number" value="${numericOnly(p.height)}" oninput="calculateBMI()">
+</div>
+
+<div class="form-group">
+<label>BMI — Automatically Calculated</label>
+<input id="bmi" class="form-control" readonly value="${p.bmi}">
+</div>
+</div>`;
+}
+
+function saveDoctorEdit(){
+if(!readAndValidatePatientForm())return;
+
+saveCurrentRecord("Doctor");
+alert("Patient record updated successfully.");
+showDoctorPatient();
+}
+
+/* =====================================================
+   SURVEYOR FORM
+===================================================== */
+function showSurveyForm(){
+editingExistingPatient=true;
+showEditForm("Patient Parameters","Save / Update Parameters");
+}
+
+/* =====================================================
+   SAVE SURVEYOR / NEW PATIENT
+===================================================== */
+function saveSurveyData(){
+if(!readAndValidatePatientForm())return;
+saveCurrentRecord("Medical Survey");
+alert("Patient parameters updated successfully.");
+showPatients();
+}
+
+function readAndValidatePatientForm(){
+let phone=document.getElementById("patientPhone").value.trim();
+let name=document.getElementById("patientName").value.trim();
+let age=Number(document.getElementById("patientAge").value);
+
+if(!name){
+    alert("Enter patient name");
+    return false;
+}
+if(!/^[0-9]{10}$/.test(phone)){
+    alert("Enter a valid 10-digit phone number");
+    return false;
+}
+if(age<=0){
+    alert("Enter a valid age");
+    return false;
+}
+return true;
+}
+
+function collectParameters(){
+return {
+bp:document.getElementById("bp").value.trim(),
+glucose:document.getElementById("glucose").value.trim()+" mg/dL",
+glucoseType:document.getElementById("glucoseType").value,
+heartRate:document.getElementById("heartRate").value.trim()+" bpm",
+spo2:document.getElementById("spo2").value.trim()+"%",
+temperature:document.getElementById("temperature").value.trim()+" °C",
+weight:document.getElementById("weight").value.trim()+" kg",
+height:document.getElementById("height").value.trim()+" cm",
+bmi:document.getElementById("bmi").value.trim()
+};
+}
+
+function saveCurrentRecord(source){
+let oldPhone=currentPatient.phone;
+
+currentPatient.name=document.getElementById("patientName").value.trim();
+currentPatient.age=Number(document.getElementById("patientAge").value);
+currentPatient.sex=document.getElementById("patientSex").value;
+currentPatient.phone=document.getElementById("patientPhone").value.trim();
+currentPatient.blood=document.getElementById("patientBlood").value;
+currentPatient.location=document.getElementById("patientLocation").value.trim();
+currentPatient.parameters=collectParameters();
+
+let riskEl=document.getElementById("riskScore");
+if(riskEl){
+    let r=Number(riskEl.value);
+    if(Number.isFinite(r)) currentPatient.risk=Math.max(0,Math.min(100,r));
+}
+
+/* Save the old/latest state into history before the new state becomes
+   the current record. This creates previous medical reports. */
+currentPatient.history.push({
+    date:new Date().toLocaleString(),
+    source:source,
+    parameters:{...currentPatient.parameters},
+    risk:currentPatient.risk
+});
+
+/* If a patient changed phone number, the new phone becomes their
+   new patient-login grouping automatically. */
+if(oldPhone!==currentPatient.phone && currentPortal==="patient"){
+    patientPhoneSession=currentPatient.phone;
+}
+}
+
+/* =====================================================
+   ADD NEW PATIENT
+===================================================== */
+function addPatient(){
+if(currentPortal!=="surveyor"){
+    alert("Only a medical surveyor can add a new patient.");
+    return;
+}
+
+let newId=patients.length ? Math.max(...patients.map(p=>p.id))+1 : 1;
+
+currentPatient={
+id:newId,
+name:"",
+age:"",
+sex:"Male",
+phone:"",
+blood:"O+",
+location:"",
+risk:0,
+parameters:{
+bp:"",glucose:"",glucoseType:"FG",heartRate:"",
+spo2:"",temperature:"",weight:"",height:"",bmi:""
+},
+notes:[],
+history:[]
+};
+
+patients.push(currentPatient);
+editingExistingPatient=false;
+showNewPatientForm();
+}
+
+function showNewPatientForm(){
+setTitle("Add New Patient","Create a new patient record");
+
+let p=currentPatient.parameters;
+
+document.getElementById("content").innerHTML=`
+<div class="card">
+<h3>New Patient Information</h3>
+
+<div class="form-group">
+<label>Name</label>
+<input id="patientName" class="form-control" placeholder="Enter patient name">
+</div>
+
+<div class="form-grid">
+<div class="form-group">
+<label>Age</label>
+<input id="patientAge" class="form-control" type="number" placeholder="Age">
+</div>
+<div class="form-group">
+<label>Sex</label>
+<select id="patientSex" class="form-control">
+<option>Male</option><option>Female</option><option>Other</option>
+</select>
+</div>
+</div>
+
+<div class="form-group">
+<label>Phone Number</label>
+<input id="patientPhone" class="form-control" type="tel" maxlength="10"
+placeholder="10-digit mobile number">
+</div>
+
+<div class="form-grid">
+<div class="form-group">
+<label>Blood Group</label>
+<select id="patientBlood" class="form-control">${bloodOptions("O+")}</select>
+</div>
+<div class="form-group">
+<label>Location</label>
+<input id="patientLocation" class="form-control" placeholder="Location">
+</div>
+</div>
+
+<div class="form-group">
+<label>Initial Risk Score (0–100)</label>
+<input id="riskScore" class="form-control" type="number" min="0" max="100" value="0">
+</div>
+</div>
+
+${medicalFormHTML(p)}
+
+<button class="primary-btn" onclick="saveNewPatient()">Create Patient Record</button>
+<button class="secondary-btn" onclick="cancelNewPatient()">Cancel</button>`;
+}
+
+function saveNewPatient(){
+if(!readAndValidatePatientForm())return;
+
+currentPatient.name=document.getElementById("patientName").value.trim();
+currentPatient.age=Number(document.getElementById("patientAge").value);
+currentPatient.sex=document.getElementById("patientSex").value;
+currentPatient.phone=document.getElementById("patientPhone").value.trim();
+currentPatient.blood=document.getElementById("patientBlood").value;
+currentPatient.location=document.getElementById("patientLocation").value.trim();
+currentPatient.parameters=collectParameters();
+currentPatient.risk=Math.max(0,Math.min(100,Number(document.getElementById("riskScore").value)||0));
+
+currentPatient.history=[{
+date:new Date().toLocaleString(),
+source:"Medical Survey - New Registration",
+parameters:{...currentPatient.parameters},
+risk:currentPatient.risk
+}];
+
+alert("New patient added successfully.");
+showPatients();
+}
+
+function cancelNewPatient(){
+patients=patients.filter(p=>p.id!==currentPatient.id);
+currentPatient=null;
+showDashboard();
+}
+
+/* =====================================================
+   REPORTS
+===================================================== */
+function showReports(){
+if(currentPortal==="patient"){
+    showPatientPhoneReports();
+    return;
+}
+
+setTitle("Reports","Current and previous medical reports");
+
+let html="";
+patients.forEach(p=>{
+let riskHTML = currentPortal==="doctor"
+    ? `<span class="risk-badge ${getRiskClass(p.risk)}">${p.risk}/100 — ${getRiskText(p.risk)}</span>`
+    : "";
+
+html+=`
+<div class="patient-card">
+<div class="patient-top">
+<div>
+<div class="patient-name">${p.name}</div>
+<div class="patient-info">📞 ${p.phone}</div>
+</div>
+${riskHTML}
+</div>
+<div class="patient-info">
+Current BP: ${p.parameters.bp}<br>
+Current Glucose: ${p.parameters.glucose}<br>
+Current Heart Rate: ${p.parameters.heartRate}<br>
+Previous reports: ${p.history.length}
+</div>
+<div class="action-row">
+<button class="small-btn primary" onclick="openPatient(${p.id})">Open Record</button>
+<button class="small-btn" onclick="showPatientHistoryById(${p.id})">View History</button>
+</div>
+</div>`;
+});
+
+document.getElementById("content").innerHTML=html || `<div class="empty-state">No reports available.</div>`;
+}
+
+/* Patient only sees records belonging to the entered phone number. */
+function showPatientPhoneReports(){
+let members=patients.filter(p=>p.phone===patientPhoneSession);
+
+setTitle("My Reports","Reports under this mobile number");
+
+let html=`
+<div class="card">
+<h3>Registered Members</h3>
+<div class="patient-info">
+Mobile number: ${patientPhoneSession}<br>
+${members.length} member${members.length===1?"":"s"} linked to this number.
+</div>
+</div>`;
+
+members.forEach(p=>{
+html+=`
+<div class="patient-card">
+<div class="patient-top">
+<div>
+<div class="patient-name">${p.name}</div>
+<div class="patient-info">${p.age} years • ${p.sex}</div>
+</div>
+</div>
+<div class="action-row">
+<button class="small-btn primary" onclick="switchPatientMember(${p.id});showPatientReport()">Current Report</button>
+<button class="small-btn" onclick="switchPatientMember(${p.id});showPatientHistory()">Previous Reports</button>
+</div>
+</div>`;
+});
+
+document.getElementById("content").innerHTML=html;
+}
+
+function showPatientReport(){
+let p=currentPatient.parameters;
+
+setTitle("My Report",currentPatient.name+" • Latest report");
+
+document.getElementById("content").innerHTML=`
+<div class="card">
+<h3>${currentPatient.name}</h3>
+<div class="patient-info">
+Age: ${currentPatient.age}<br>
+Sex: ${currentPatient.sex}<br>
+Blood Group: ${currentPatient.blood}<br>
+Location: ${currentPatient.location}<br>
+Mobile: ${currentPatient.phone}
+</div>
+</div>
+
+<div class="card">
+<h3>Latest Medical Parameters</h3>
+${parameterRows(p)}
+</div>
+
+<div class="card">
+<div class="section-title">
+<h3>Previous Reports</h3>
+<button class="small-btn" onclick="showPatientHistory()">View All</button>
+</div>
+${renderHistory(currentPatient,3)}
+</div>`;
+}
+
+/* =====================================================
+   HISTORY
+===================================================== */
+function showPatientHistory(){
+showPatientHistoryById(currentPatient.id);
+}
+
+function showPatientHistoryById(id){
+let p=patients.find(x=>x.id===id);
+if(!p)return;
+currentPatient=p;
+
+setTitle("Previous Reports",p.name);
+
+document.getElementById("content").innerHTML=`
+<div class="card">
+<h3>${p.name}</h3>
+<div class="patient-info">
+📞 ${p.phone}<br>
+${p.age} years • ${p.sex}
+</div>
+</div>
+
+<div class="card">
+<h3>Medical Report History</h3>
+${renderHistory(p)}
+</div>`;
+}
+
+function renderHistory(p,limit=null){
+let history=[...p.history].reverse();
+if(limit)history=history.slice(0,limit);
+
+if(history.length===0)
+return `<div class="empty-state">No previous medical reports available.</div>`;
+
+return history.map((h,i)=>`
+<div class="history-item">
+<div class="history-head">
+<b>${i===0?"Latest Report":"Previous Report"}</b>
+<small>${h.date}</small>
+</div>
+<small>Source: ${h.source||"Medical Record"}</small>
+<div style="margin-top:8px">
+BP: <b>${h.parameters.bp||"-"}</b><br>
+Glucose: <b>${h.parameters.glucose||"-"}</b><br>
+Heart Rate: <b>${h.parameters.heartRate||"-"}</b><br>
+SpO₂: <b>${h.parameters.spo2||"-"}</b><br>
+Temperature: <b>${h.parameters.temperature||"-"}</b><br>
+Weight: <b>${h.parameters.weight||"-"}</b><br>
+BMI: <b>${h.parameters.bmi||"-"}</b>
+</div>
+</div>`).join("");
+}
+
+/* =====================================================
+   DOCTOR NOTES
+===================================================== */
+function saveDoctorNote(){
+let note=document.getElementById("doctorNote").value.trim();
+if(!note){
+    alert("Enter a note");
+    return;
+}
+currentPatient.notes.push({
+text:note,
+date:new Date().toLocaleString()
+});
+alert("Doctor note saved");
+showDoctorPatient();
+}
+
+function renderNotes(patient){
+if(patient.notes.length===0){
+return `<p style="color:var(--muted)">No doctor notes available.</p>`;
+}
+return patient.notes.map(n=>`
+<div class="note">
+<b>Doctor</b><br><br>
+${esc(n.text)}<br><br>
+<small>${n.date}</small>
+</div>`).join("");
+}
+
+/* =====================================================
+   PARAMETER HELPERS
+===================================================== */
+function parameterRows(p){
+return `
+<div class="parameter-row"><span>Blood Pressure</span><b>${p.bp||"-"}</b></div>
+<div class="parameter-row"><span>Glucose (${p.glucoseType||"-"})</span><b>${p.glucose||"-"}</b></div>
+<div class="parameter-row"><span>Heart Rate</span><b>${p.heartRate||"-"}</b></div>
+<div class="parameter-row"><span>SpO₂</span><b>${p.spo2||"-"}</b></div>
+<div class="parameter-row"><span>Temperature</span><b>${p.temperature||"-"}</b></div>
+<div class="parameter-row"><span>Weight</span><b>${p.weight||"-"}</b></div>
+<div class="parameter-row"><span>Height</span><b>${p.height||"-"}</b></div>
+<div class="parameter-row"><span>BMI</span><b>${p.bmi||"-"}</b></div>`;
+}
+
+function bloodOptions(selected){
+let groups=["A+","A-","B+","B-","AB+","AB-","O+","O-"];
+return groups.map(g=>`<option value="${g}" ${g===selected?"selected":""}>${g}</option>`).join("");
+}
+
+function calculateBMI(){
+let weight=parseFloat(document.getElementById("weight").value);
+let height=parseFloat(document.getElementById("height").value);
+if(weight>0&&height>0){
+document.getElementById("bmi").value=(weight/((height/100)*(height/100))).toFixed(1);
+}
+}
+
+function numericOnly(value){
+let m=String(value||"").match(/-?[0-9]+(?:\.[0-9]+)?/);
+return m?m[0]:"";
+}
+
+function esc(value){
+return String(value??"")
+.replace(/&/g,"&amp;").replace(/</g,"&lt;")
+.replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
+
+/* =====================================================
+   RISK GROUPS
+===================================================== */
+function showRiskPatients(type){
+let title="Risk Patients", subtitle="Filtered patient records", list=[];
+
+if(type==="high"){
+title="High Risk Patients";
+subtitle="Risk score 71–100";
+list=patients.filter(p=>p.risk>=71);
+}
+else if(type==="moderate"){
+title="Moderate Risk Patients";
+subtitle="Risk score 31–70";
+list=patients.filter(p=>p.risk>=31&&p.risk<=70);
+}
+else{
+title="Low Risk Patients";
+subtitle="Risk score 0–30";
+list=patients.filter(p=>p.risk<=30);
+}
+
+setTitle(title,subtitle);
+
+document.getElementById("content").innerHTML=list.length?list.map(p=>`
+<div class="patient-card" onclick="openPatient(${p.id})">
+<div class="patient-top">
+<div class="patient-name">${p.name}</div>
+<span class="risk-badge ${getRiskClass(p.risk)}">${p.risk}/100</span>
+</div>
+<div class="patient-info">
+${p.age} years • ${p.sex}<br>
+📞 ${p.phone}<br>
+📍 ${p.location}<br>
+📋 ${p.history.length} report${p.history.length===1?"":"s"}
+</div>
+</div>`).join("")
+:`<div class="empty-state">No patients in this risk group.</div>`;
+}
+
+/* =====================================================
+   TRENDS
+===================================================== */
+function showTrends(){
+setTitle("Risk Trends","Risk score over time");
+
+document.getElementById("content").innerHTML=`
+<div class="card">
+<h3>Select Time Period</h3>
+<div class="filters">
+<button class="filter active" onclick="selectTrend(this)">1 Week</button>
+<button class="filter" onclick="selectTrend(this)">1 Month</button>
+<button class="filter" onclick="selectTrend(this)">3 Months</button>
+<button class="filter" onclick="selectTrend(this)">1 Year</button>
+</div>
+</div>
+
+<div class="card">
+<h3>Risk Score Trend</h3>
+<div class="chart">
+<svg viewBox="0 0 400 160">
+<polyline points="10,125 60,110 110,115 160,85 210,95 260,65 310,72 360,40"
+fill="none" stroke="currentColor" stroke-width="4"
+stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+</div>
+
+<div class="card">
+<h3>Available Trend Periods</h3>
+<div class="patient-info">
+✓ 1 Week<br><br>✓ 1 Month<br><br>✓ 3 Months<br><br>✓ 1 Year
+</div>
+</div>`;
+}
+
+function selectTrend(button){
+document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+button.classList.add("active");
+}
+
+/* =====================================================
+   RISK HELPERS
+===================================================== */
+function getRiskClass(score){
+if(score<=30)return "green";
+if(score<=70)return "yellow";
+return "red";
+}
+
+function getRiskText(score){
+if(score<=30)return "Low Risk";
+if(score<=70)return "Moderate Risk";
+return "High Risk";
+}
+
+/* =====================================================
+   TITLE / THEME / LOGOUT
+===================================================== */
+function setTitle(title,subtitle){
+document.getElementById("pageTitle").innerText=title;
+document.getElementById("pageSubtitle").innerText=subtitle;
+}
+
+function toggleTheme(){
+document.body.classList.toggle("dark");
+}
+
+function logout(){
+currentPortal="";
+currentPatient=null;
+patientPhoneSession="";
+document.getElementById("mainApp").classList.add("hidden");
+document.getElementById("loginPage").classList.remove("hidden");
+location.reload();
+}
+</script>
+
+</body>
+</html>
