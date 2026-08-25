@@ -1,58 +1,105 @@
-# 6RAYS 🧬
+# Jeeva Setu — Backend
 
-###  Smart India Hackathon 2026 🚀 
+Offline-first biomedical health monitoring backend for rural/underserved areas.
+Flask REST API + SQLite. Pairs with the `4.html` frontend built by the team.
 
-**6RAYS** is a team of Biomedical Engineering students focused on developing innovative, practical, and impactful solutions to real-world healthcare challenges.
+## Folder structure
 
----
+```
+jeeva-setu-backend/
+├── app.py            # Flask API — all endpoints
+├── database.py       # SQLite schema + connection helper
+├── risk.py           # Per-parameter risk scoring logic
+├── requirements.txt
+├── README.md
+└── 4.html            # (add your teammate's frontend file here)
+```
 
-## 👥 Team
+## Local setup
 
-| Name             | Role        |
-| ---------------- | ----------- |
-| **Manikandan**   |  Lead     |
-| Akshaya Devi     |  Member     |
-| Najeebur Rahuman |  Member     |
-| Sudharsan        |  Member     |
-| Rithisree        |  Member     |
-| Lakshanya        |  Member     |
+```bash
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+```
 
----
+Server runs at `http://localhost:5000`. First run auto-creates `jeeva_setu.db`.
 
-## 💡 Project
+## Key endpoints
 
-### **Project Title : JEEVA SETU**
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/auth/request-otp` | Generate OTP (returned directly in demo mode) |
+| POST | `/api/auth/verify-otp` | Verify OTP and log in |
+| POST | `/api/patients` | Register a patient |
+| GET | `/api/patients` | List all patients |
+| GET | `/api/patients/<id>` | Get one patient |
+| POST | `/api/parameters` | Record a health reading |
+| GET | `/api/patients/<id>/history` | Full reading history |
+| GET | `/api/patients/<id>/risk` | Risk score from latest readings |
+| POST | `/api/patients/<id>/notes` | Add a doctor's note |
+| GET | `/api/patients/<id>/notes` | Get notes |
+| POST | `/api/sync` | Batch sync offline-collected data |
+| GET | `/api/health` | Health check |
 
-Transforming fragmented rural health-survey data into continuous digital patient histories, enabling offline monitoring, secure synchronisation, longitudinal health tracking, and actionable trends for timely, informed clinical follow-up.
+## Testing quickly with curl
 
+```bash
+# 1. Request OTP
+curl -X POST http://localhost:5000/api/auth/request-otp \
+  -H "Content-Type: application/json" \
+  -d '{"phone": "9999999999"}'
 
+# 2. Verify OTP (use the otp returned above)
+curl -X POST http://localhost:5000/api/auth/verify-otp \
+  -H "Content-Type: application/json" \
+  -d '{"phone": "9999999999", "otp": "123456"}'
 
+# 3. Register a patient
+curl -X POST http://localhost:5000/api/patients \
+  -H "Content-Type: application/json" \
+  -d '{"patient_id": "P001", "name": "Test Patient", "age": 45, "gender": "F", "village": "Sample Village"}'
 
----
+# 4. Add a reading
+curl -X POST http://localhost:5000/api/parameters \
+  -H "Content-Type: application/json" \
+  -d '{"patient_id": "P001", "parameter_name": "SPO2", "value": 92, "unit": "%", "date": "2026-08-25", "time": "10:00"}'
 
-## 🛠️ Technologies
+# 5. Check risk score
+curl http://localhost:5000/api/patients/P001/risk
 
-Technologies and tools will be selected based on the project requirements.
+# 6. Offline sync
+curl -X POST http://localhost:5000/api/sync \
+  -H "Content-Type: application/json" \
+  -d '{"parameters": [{"patient_id": "P001", "parameter_name": "HEART_RATE", "value": 110, "date": "2026-08-25", "time": "11:00"}]}'
+```
 
-* Biomedical Instrumentation
-* Sensors & Embedded Systems
-* HTML,Python Fast API
-* Data Analysis
+## Pushing to GitHub
 
----
+```bash
+# from inside the jeeva-setu-backend folder
+git init
+git add .
+git commit -m "Jeeva Setu backend: OTP login, sync API, risk scoring"
 
-## 📌 Project Status
+# create a new empty repo on github.com first (no README/gitignore), then:
+git branch -M main
+git remote add origin https://github.com/<your-username>/jeeva-setu.git
+git push -u origin main
+```
 
-🟢 **Reaching its final stage**
+Add a `.gitignore` with at least:
+```
+venv/
+__pycache__/
+*.db
+```
 
----
+## Notes
 
-## 🏆 Hackathon
-
-**Team :** 6RAYS , 
-**Department :** Biomedical Engineering , 
-**Event :** Internal Hackathon — 2026 .
-
----
-
-### *Engineering ideas. Biomedical solutions. Real-world impact.*
+- OTP is returned in the API response only because `DEMO_MODE = True` in `app.py` —
+  flip this off and wire up an SMS gateway (Twilio/MSG91) for production.
+- Risk score averages a per-parameter risk (0/1/2), not raw parameter values —
+  see `risk.py` for the normal ranges used.
+- This is a web app (browser + local Flask server), not a native mobile app.
